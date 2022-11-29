@@ -35,8 +35,15 @@ def verUser():
     result = cursor.fetchone() 
     
     if result:
+        sqlName = "Select fullname from Usuarios where username = %s"
+        dataName = Username
+
+        cursor.execute(sqlName, (dataName,))
+        fullname = cursor.fetchone()
+        
         telaLogin.close()
         telaMain.show()
+        telaMain.lFullname.setText(str(fullname[0]))
     else:
         QtWidgets.QMessageBox.warning(telaLogin, 'ERRO!', "O usuario ou a senha nao existe!")
 

@@ -42,6 +42,9 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 10px;
@@ -194,6 +197,9 @@ border-width: 1px;
      <font>
       <kerning>false</kerning>
      </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="toolTip">
      <string/>

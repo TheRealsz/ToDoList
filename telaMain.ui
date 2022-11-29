@@ -6,20 +6,301 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1294</width>
+    <height>931</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>List Efficient</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="Icon">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>0</y>
+      <width>491</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>Logo.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>91</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>30</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string>Ola!</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lFullname">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>180</y>
+      <width>691</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>30</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnTelaAdd">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>270</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(205, 217, 255);
+border-style: outset</string>
+    </property>
+    <property name="text">
+     <string>ADICIONAR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnTelaEdit">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>270</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(205, 217, 255);
+border-style: outset</string>
+    </property>
+    <property name="text">
+     <string>EDITAR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnTelaEditStatus">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>270</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(205, 217, 255);
+border-style: outset</string>
+    </property>
+    <property name="text">
+     <string>EDITAR STATUS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnTelaDelete">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>270</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(205, 217, 255);
+border-style: outset</string>
+    </property>
+    <property name="text">
+     <string>DELETAR</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="gbFazer">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>370</y>
+      <width>301</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="gbFazendo">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>370</y>
+      <width>301</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="gbFeito">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>370</y>
+      <width>301</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>350</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 85, 0);
+border-radius: 5px;</string>
+    </property>
+    <property name="text">
+     <string>A Fazer</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>350</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 170, 127);
+border-radius: 5px;</string>
+    </property>
+    <property name="text">
+     <string>Fazendo</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>350</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 255, 0);
+border-radius: 5px;</string>
+    </property>
+    <property name="text">
+     <string>Feito</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1294</width>
      <height>21</height>
     </rect>
    </property>

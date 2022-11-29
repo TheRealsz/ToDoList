@@ -148,6 +148,9 @@ border-width: 1px;
      <height>41</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 10px;
@@ -204,6 +207,9 @@ border-width: 1px;
      <width>221</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);
