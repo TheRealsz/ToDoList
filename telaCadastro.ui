@@ -162,7 +162,7 @@ border-style: outset;
     <string>CRIAR</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="inputFullname">
+  <widget class="QLineEdit" name="inputCFullname">
    <property name="geometry">
     <rect>
      <x>120</x>

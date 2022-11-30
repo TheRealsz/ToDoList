@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1294</width>
+    <width>1242</width>
     <height>931</height>
    </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
   </property>
   <property name="windowTitle">
    <string>List Efficient</string>
@@ -91,6 +97,12 @@
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;
 background-color: rgb(205, 217, 255);
@@ -98,6 +110,9 @@ border-style: outset</string>
     </property>
     <property name="text">
      <string>ADICIONAR</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="btnTelaEdit">
@@ -163,57 +178,10 @@ border-style: outset</string>
      <string>DELETAR</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="gbFazer">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>370</y>
-      <width>301</width>
-      <height>501</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="gbFazendo">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>370</y>
-      <width>301</width>
-      <height>501</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="gbFeito">
-    <property name="geometry">
-     <rect>
-      <x>920</x>
-      <y>370</y>
-      <width>301</width>
-      <height>501</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>80</x>
       <y>350</y>
       <width>61</width>
       <height>16</height>
@@ -241,7 +209,7 @@ border-radius: 5px;</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>460</x>
       <y>350</y>
       <width>81</width>
       <height>16</height>
@@ -269,7 +237,7 @@ border-radius: 5px;</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>840</x>
       <y>350</y>
       <width>61</width>
       <height>16</height>
@@ -294,13 +262,58 @@ border-radius: 5px;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QListWidget" name="lwFazer">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>370</y>
+      <width>331</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="lwFazendo">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>370</y>
+      <width>331</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="lwFeito">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>370</y>
+      <width>331</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1294</width>
+     <width>1242</width>
      <height>21</height>
     </rect>
    </property>
