@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>487</width>
-    <height>189</height>
+    <height>231</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,9 +55,9 @@
   <widget class="QPushButton" name="btnEditStatus">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>130</x>
      <y>110</y>
-     <width>121</width>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
@@ -67,10 +67,33 @@
    <property name="styleSheet">
     <string notr="true">border-radius: 10px;
 background-color: rgb(205, 217, 255);
-border-style: outset</string>
+border-style: outset;
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string>EDITAR</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnVoltarTelaMainES">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>170</y>
+     <width>221</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(205, 217, 255);
+border-radius: 10px;
+border-style: outset;
+border: 2px solid black;</string>
+   </property>
+   <property name="text">
+    <string>VOLTAR</string>
    </property>
   </widget>
  </widget>

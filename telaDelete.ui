@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>483</width>
-    <height>190</height>
+    <width>468</width>
+    <height>230</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QLineEdit" name="inputID">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>40</y>
      <width>331</width>
      <height>31</height>
@@ -53,9 +53,9 @@ border-width: 1px;
   <widget class="QPushButton" name="btnDelete">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>120</x>
      <y>100</y>
-     <width>121</width>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
@@ -65,10 +65,33 @@ border-width: 1px;
    <property name="styleSheet">
     <string notr="true">border-radius: 10px;
 background-color: rgb(205, 217, 255);
-border-style: outset</string>
+border-style: outset;
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string>DELETAR</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnVoltarTelaMainD">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>160</y>
+     <width>221</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(205, 217, 255);
+border-radius: 10px;
+border-style: outset;
+border: 2px solid black;</string>
+   </property>
+   <property name="text">
+    <string>VOLTAR</string>
    </property>
   </widget>
  </widget>

@@ -135,6 +135,9 @@ def cadastro():
         listarItensUsuario()
 
 def listarItensUsuario():
+    telaMain.lwFazer.clear()
+    telaMain.lwFazendo.clear()
+    telaMain.lwFeito.clear()
     connection = conectarBD("localhost","root", password, bd) 
     cursor = connection.cursor()
     sqlTask = "Select * from Tasks where userID = %s"
@@ -158,7 +161,88 @@ def listarItensUsuario():
             
         inicio = inicio+1
 
+def addTask():
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor()
 
+    name = telaAdd.inputName.text()
+    desc = telaAdd.inputDescricao.text()
+    data_final = telaAdd.inputData.text()
+    aFazer = telaAdd.rbFazer.isChecked()
+    feito = telaAdd.rbFeito.isChecked()
+    fazendo = telaAdd.rbFazendo.isChecked()
+
+    if aFazer == False and feito == False and fazendo == False:
+        QtWidgets.QMessageBox.warning(telaAdd, 'Atençao!', "Informe o Status de sua task para poder criar ela")
+
+    if name == "" or data_final == "":
+        QtWidgets.QMessageBox.warning(telaCadastro, 'Atençao!', "Informe os dados necessarios para criar a task!")
+      
+    else:
+        if aFazer == True:
+            sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
+            data = (name, desc, data_final, userID[0], 1)
+
+            cursor.execute(sql, data) 
+            connection.commit() 
+            taskID = cursor.lastrowid
+
+            QtWidgets.QMessageBox.about(telaCadastro, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
+
+        if fazendo == True:
+            sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
+            data = (name, desc, data_final, userID[0], 2)
+
+            cursor.execute(sql, data) 
+            connection.commit() 
+            taskID = cursor.lastrowid
+
+            QtWidgets.QMessageBox.about(telaCadastro, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
+
+        if feito == True:
+            sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
+            data = (name, desc, data_final, userID[0], 3)
+
+            cursor.execute(sql, data) 
+            connection.commit() 
+            taskID = cursor.lastrowid
+
+            QtWidgets.QMessageBox.about(telaCadastro, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))     
+
+        cursor.close() 
+        connection.close()
+        telaAdd.inputName.clear()
+        telaAdd.inputDescricao.clear()
+        telaAdd.inputData.clear()
+        telaAdd.close()
+        telaMain.show()
+        listarItensUsuario()   
+
+def deleteTask():
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor()
+    idTask = telaDelete.inputID.text()
+    
+    if idTask == "":
+        QtWidgets.QMessageBox.warning(telaDelete, 'Atençao!', "Informe os dados necessarios para deletar a task!")
+
+    else:
+        sql = "DELETE FROM Tasks WHERE ID = %s"
+        data = idTask
+
+        cursor.execute(sql, (data,)) 
+        connection.commit()
+
+        recordsaffected = cursor.rowcount
+
+        QtWidgets.QMessageBox.about(telaDelete, "Sucesso!", f"{recordsaffected} registros excluídos")
+
+    cursor.close()
+    connection.close() 
+    telaDelete.inputID.clear()
+    telaDelete.close()
+    telaMain.show()
+    listarItensUsuario()
 
 # def insert_BD():
 #     connection = conectarBD("localhost","root","aulasDB_2022","projeto") #Recebe a conexão estabelecida com o banco
@@ -216,6 +300,8 @@ telaMain.btnTelaAdd.clicked.connect(abrirTelaAdd)
 telaMain.btnTelaEdit.clicked.connect(abrirTelaEdit)
 telaMain.btnTelaEditStatus.clicked.connect(abrirTelaEditStatus)
 telaMain.btnTelaDelete.clicked.connect(abrirTelaDelete)
+telaAdd.btnAdd.clicked.connect(addTask)
+telaDelete.btnDelete.clicked.connect(deleteTask)
 #tela.btnLimpar.clicked.connect(Limpar) #Vinculando a função Limpar ao botão btnLimpar
 #tela.btnCadastrar.clicked.connect(insert_BD)
 app.exec()

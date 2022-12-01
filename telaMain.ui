@@ -106,7 +106,8 @@
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;
 background-color: rgb(205, 217, 255);
-border-style: outset</string>
+border-style: outset;
+border: 2px solid black;</string>
     </property>
     <property name="text">
      <string>ADICIONAR</string>
@@ -130,7 +131,8 @@ border-style: outset</string>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;
 background-color: rgb(205, 217, 255);
-border-style: outset</string>
+border-style: outset;
+border: 2px solid black;</string>
     </property>
     <property name="text">
      <string>EDITAR</string>
@@ -151,7 +153,8 @@ border-style: outset</string>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;
 background-color: rgb(205, 217, 255);
-border-style: outset</string>
+border-style: outset;
+border: 2px solid black;</string>
     </property>
     <property name="text">
      <string>EDITAR STATUS</string>
@@ -172,7 +175,8 @@ border-style: outset</string>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;
 background-color: rgb(205, 217, 255);
-border-style: outset</string>
+border-style: outset;
+border: 2px solid black;</string>
     </property>
     <property name="text">
      <string>DELETAR</string>

@@ -152,11 +152,10 @@ border-width: 1px;
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
+    <string notr="true">background-color: rgb(205, 217, 255);
 border-radius: 10px;
 border-style: outset;
-
-</string>
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string>CRIAR</string>
@@ -212,11 +211,10 @@ border-width: 1px;
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
+    <string notr="true">background-color: rgb(205, 217, 255);
 border-radius: 10px;
 border-style: outset;
-
-</string>
+border: 2px solid black;</string>
    </property>
    <property name="text">
     <string>VOLTAR</string>
