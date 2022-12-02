@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1242</width>
+    <width>1221</width>
     <height>931</height>
    </rect>
   </property>
@@ -65,7 +65,7 @@
      <rect>
       <x>110</x>
       <y>180</y>
-      <width>691</width>
+      <width>16</width>
       <height>51</height>
      </rect>
     </property>
@@ -79,7 +79,9 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 255, 255);</string>
+     <string notr="true">border-radius: 10px;
+background-color: rgb(205, 217, 255);
+</string>
     </property>
     <property name="text">
      <string/>
@@ -88,9 +90,9 @@
    <widget class="QPushButton" name="btnTelaAdd">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>40</x>
       <y>270</y>
-      <width>121</width>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
@@ -119,9 +121,9 @@ border: 2px solid black;</string>
    <widget class="QPushButton" name="btnTelaEdit">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>290</x>
       <y>270</y>
-      <width>121</width>
+      <width>151</width>
       <height>41</height>
      </rect>
     </property>
@@ -141,9 +143,9 @@ border: 2px solid black;</string>
    <widget class="QPushButton" name="btnTelaEditStatus">
     <property name="geometry">
      <rect>
-      <x>770</x>
+      <x>530</x>
       <y>270</y>
-      <width>121</width>
+      <width>151</width>
       <height>41</height>
      </rect>
     </property>
@@ -163,9 +165,9 @@ border: 2px solid black;</string>
    <widget class="QPushButton" name="btnTelaDelete">
     <property name="geometry">
      <rect>
-      <x>1050</x>
+      <x>770</x>
       <y>270</y>
-      <width>121</width>
+      <width>151</width>
       <height>41</height>
      </rect>
     </property>
@@ -311,13 +313,35 @@ border-radius: 5px;</string>
      </font>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnLogout">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>270</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px;
+background-color: rgb(255, 99, 88);
+border-style: outset;
+border: 2px solid black;</string>
+    </property>
+    <property name="text">
+     <string>LOGOUT</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1242</width>
+     <width>1221</width>
      <height>21</height>
     </rect>
    </property>

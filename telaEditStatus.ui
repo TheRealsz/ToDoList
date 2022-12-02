@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>487</width>
-    <height>231</height>
+    <width>478</width>
+    <height>327</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Editar status</string>
   </property>
-  <widget class="QRadioButton" name="radioButton">
+  <widget class="QRadioButton" name="rbFazer">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>50</y>
+     <y>110</y>
      <width>82</width>
      <height>17</height>
     </rect>
@@ -25,12 +25,15 @@
    <property name="text">
     <string>A Fazer</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroup</string>
+   </attribute>
   </widget>
-  <widget class="QRadioButton" name="radioButton_2">
+  <widget class="QRadioButton" name="rbFazendo">
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>50</y>
+     <y>110</y>
      <width>82</width>
      <height>17</height>
     </rect>
@@ -38,12 +41,15 @@
    <property name="text">
     <string>Fazendo</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroup</string>
+   </attribute>
   </widget>
-  <widget class="QRadioButton" name="radioButton_3">
+  <widget class="QRadioButton" name="rbFeito">
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>50</y>
+     <y>110</y>
      <width>82</width>
      <height>17</height>
     </rect>
@@ -51,12 +57,15 @@
    <property name="text">
     <string>Feito</string>
    </property>
+   <attribute name="buttonGroup">
+    <string notr="true">buttonGroup</string>
+   </attribute>
   </widget>
   <widget class="QPushButton" name="btnEditStatus">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>110</y>
+     <x>120</x>
+     <y>170</y>
      <width>221</width>
      <height>41</height>
     </rect>
@@ -77,8 +86,8 @@ border: 2px solid black;</string>
   <widget class="QPushButton" name="btnVoltarTelaMainES">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>170</y>
+     <x>120</x>
+     <y>230</y>
      <width>221</width>
      <height>41</height>
     </rect>
@@ -96,7 +105,51 @@ border: 2px solid black;</string>
     <string>VOLTAR</string>
    </property>
   </widget>
+  <widget class="QLineEdit" name="inputID">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>50</y>
+     <width>331</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <strikeout>false</strikeout>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 10px;
+border-style: outset;
+border-width: 1px;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Normal</enum>
+   </property>
+   <property name="cursorPosition">
+    <number>0</number>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>ID</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup">
+   <property name="exclusive">
+    <bool>true</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

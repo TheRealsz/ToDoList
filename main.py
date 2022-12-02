@@ -7,25 +7,22 @@ import mysql.connector
 import dotenv
 dotenv.load_dotenv(dotenv.find_dotenv())
 
-#####Comando abaixo só é necessário executar uma única vez
-#Faz a instalação do conector MySQL
-
 password = os.getenv("passwordBD")
 bd = os.getenv("bdName")
 
 def conectarBD(host, usuario, senha, DB):
-    connection = mysql.connector.connect( #Informando os dados para conexão com o BD
-        host = host, #ip do servidor do BD
-        user= usuario, #Usuário do MySQL 
-        password=senha, #Senha do usuário do MySQL
-        database=DB  #nome do DB criado
-    ) #Define o banco de dados usado
+    connection = mysql.connector.connect( 
+        host = host, 
+        user= usuario, 
+        password=senha, 
+        database=DB 
+    ) 
 
     return connection
 
 def verUser():
-    connection = conectarBD("localhost","root", password, bd) #Recebe a conexão estabelecida com o banco
-    cursor = connection.cursor() #Cursor para comunicação com o banco
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor() 
     
     Username = telaLogin.inputUsername.text()
     Password = telaLogin.inputPassword.text()
@@ -42,10 +39,11 @@ def verUser():
         cursor.execute(sqlName, (dataName,))
         
         fullname = cursor.fetchone()
-        
+        fullnameLen = fullname[0].__len__()
         telaLogin.close()
         telaMain.show()
-        telaMain.lFullname.setText(str(fullname[0]))
+        telaMain.lFullname.setFixedWidth(fullnameLen * 24)
+        telaMain.lFullname.setText(str(fullname[0]) + " ")
 
         sqlID = "Select ID from Usuarios where username = %s"
         dataID = Username
@@ -55,9 +53,15 @@ def verUser():
 
         cursor.close()
         connection.close()
+        telaLogin.inputUsername.clear()
+        telaLogin.inputPassword.clear()
         listarItensUsuario()
     else:
         QtWidgets.QMessageBox.warning(telaLogin, 'ERRO!', "O usuario ou a senha nao existe!")
+
+def funLogout():
+    telaMain.close()
+    telaLogin.show()
 
 def abrirTelaCadastro():
     telaLogin.close()
@@ -67,9 +71,9 @@ def abrirTelaAdd():
     telaMain.close()
     telaAdd.show()
 
-def abrirTelaEdit():
+def abrirTelaInfoID():
     telaMain.close()
-    telaEdit.show()
+    telaInfoID.show()
 
 def abrirTelaEditStatus():
     telaMain.close()
@@ -82,7 +86,27 @@ def abrirTelaDelete():
 def voltarTelaLogin():
     telaCadastro.close()
     telaLogin.show()
-    
+
+def volTelaMainAdd():  
+    telaAdd.close()
+    telaMain.show()
+    listarItensUsuario()
+
+def volTelaMainDel():
+    telaDelete.close()
+    telaMain.show()
+    listarItensUsuario()
+
+def volTelaMainES():
+    telaEditStatus.close()
+    telaMain.show()
+    listarItensUsuario()
+ 
+def volTelaMainIID():
+    telaInfoID.close()
+    telaMain.show()
+    listarItensUsuario()
+
 def cadastro():
     connection = conectarBD("localhost","root", password, bd) 
     cursor = connection.cursor()
@@ -118,18 +142,22 @@ def cadastro():
         cursor.execute(sqlName, (dataName,))
 
         fullname = cursor.fetchone()
-        telaMain.lFullname.setText(str(fullname[0]))
+        fullnameLen = fullname[0].__len__()
+        telaMain.lFullname.setFixedWidth(fullnameLen * 24)
+        telaMain.lFullname.setText(str(fullname[0]) + " ")
 
         sqlID = "Select ID from Usuarios where username = %s"
         dataID = cUsername
         cursor.execute(sqlID, (dataID,))
-
+        global userID
         userID = cursor.fetchone()
         print(str(userID[0]))
 
         cursor.close()
         connection.close() 
-
+        telaCadastro.inputCFullname.clear()
+        telaCadastro.inputCUsername.clear()
+        telaCadastro.inputCPassword.text()
         telaCadastro.close()
         telaMain.show()
         listarItensUsuario()
@@ -176,7 +204,7 @@ def addTask():
         QtWidgets.QMessageBox.warning(telaAdd, 'Atençao!', "Informe o Status de sua task para poder criar ela")
 
     if name == "" or data_final == "":
-        QtWidgets.QMessageBox.warning(telaCadastro, 'Atençao!', "Informe os dados necessarios para criar a task!")
+        QtWidgets.QMessageBox.warning(telaAdd, 'Atençao!', "Informe os dados necessarios para criar a task!")
       
     else:
         if aFazer == True:
@@ -187,7 +215,7 @@ def addTask():
             connection.commit() 
             taskID = cursor.lastrowid
 
-            QtWidgets.QMessageBox.about(telaCadastro, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
+            QtWidgets.QMessageBox.about(telaAdd, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
 
         if fazendo == True:
             sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
@@ -197,7 +225,7 @@ def addTask():
             connection.commit() 
             taskID = cursor.lastrowid
 
-            QtWidgets.QMessageBox.about(telaCadastro, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
+            QtWidgets.QMessageBox.about(telaAdd, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
 
         if feito == True:
             sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
@@ -207,7 +235,7 @@ def addTask():
             connection.commit() 
             taskID = cursor.lastrowid
 
-            QtWidgets.QMessageBox.about(telaCadastro, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))     
+            QtWidgets.QMessageBox.about(telaAdd, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))     
 
         cursor.close() 
         connection.close()
@@ -237,51 +265,102 @@ def deleteTask():
 
         QtWidgets.QMessageBox.about(telaDelete, "Sucesso!", f"{recordsaffected} registros excluídos")
 
-    cursor.close()
-    connection.close() 
-    telaDelete.inputID.clear()
-    telaDelete.close()
-    telaMain.show()
-    listarItensUsuario()
+        cursor.close()
+        connection.close() 
+        telaDelete.inputID.clear()
+        telaDelete.close()
+        telaMain.show()
+        listarItensUsuario()
 
-# def insert_BD():
-#     connection = conectarBD("localhost","root","aulasDB_2022","projeto") #Recebe a conexão estabelecida com o banco
-#     cursor = connection.cursor() #Cursor para comunicação com o banco
-#     Nome = tela.txtNome.text()
-#     CPF = tela.txtCPF.text()
-#     endereco = tela.txtEndereco.text() + " " + tela.txtNumero.text()
+def editStatusTask():
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor()
 
-#     sql = "INSERT INTO Cliente (nome, cpf, endereco) VALUES (%s, %s, %s)"
-#     data = (
-#     Nome,
-#     CPF,
-#     endereco
-#     )
+    Id = telaEditStatus.inputID.text()
+    aFazer = telaEditStatus.rbFazer.isChecked()
+    feito = telaEditStatus.rbFeito.isChecked()
+    fazendo = telaEditStatus.rbFazendo.isChecked()
 
-#     cursor.execute(sql, data) #Executa o comando SQL
-#     connection.commit() #Efetua as modificações
+    if aFazer == False and feito == False and fazendo == False:
+        QtWidgets.QMessageBox.warning(telaEditStatus, 'Atençao!', "Informe o Status de sua task para poder editar ela")
 
-#     userid = cursor.lastrowid #Obtém o último ID cadastrado
+    if Id == "":
+        QtWidgets.QMessageBox.warning(telaEditStatus, 'Atençao!', "Informe o ID para editar o status da task!")
+      
+    else:
+        if aFazer == True:
+            sql = "UPDATE Tasks SET statusID = %s WHERE ID = %s"
+            data = (1, Id)
 
-#     cursor.close() #Fecha o cursor
-#     connection.close() #Fecha a conexão com o BD
+            cursor.execute(sql, data) 
+            connection.commit() 
 
-#     QtWidgets.QMessageBox.about(tela, 'SUCESSO!', "Foi cadastrado o novo cliente de ID: " + str(userid))
 
-# def Limpar(): #Função usada para limpar o texto das caixas de texto
-#     tela.txtNome.setText("")
-#     tela.txtCPF.setText("")
-#     tela.txtEndereco.setText("")
-#     tela.txtNumero.setText("")
-#     tela.dateEdit.setDate(QDate(2020, 6, 10))
+        if fazendo == True:
+            sql = "UPDATE Tasks SET statusID = %s WHERE ID = %s"
+            data = (2, Id)
 
-# def AbrirTelaCadastro():
-#     tela.show()
-#     telaMenu.close()
+            cursor.execute(sql, data) 
+            connection.commit() 
 
-# def AbrirTelaConsulta():
-#     telaConsulta.show()
-#     telaMenu.close()
+
+        if feito == True:
+            sql = "UPDATE Tasks SET statusID = %s WHERE ID = %s"
+            data = (3, Id)
+
+            cursor.execute(sql, data) 
+            connection.commit() 
+
+        QtWidgets.QMessageBox.about(telaEditStatus, 'SUCESSO!', f"O status da task de ID {Id} foi atualizado!")
+        cursor.close() 
+        connection.close()
+        telaEditStatus.inputID.clear()
+        telaEditStatus.close()
+        telaMain.show()
+        listarItensUsuario()   
+
+def getIdEdit():
+    global IdTaskEdit
+    IdTaskEdit = telaInfoID.inputID.text()
+
+    if IdTaskEdit == "":
+        QtWidgets.QMessageBox.warning(telaInfoID, 'Atençao!', "Informe o ID da task para poder edita-la!")
+
+    else:
+        telaInfoID.close()
+        telaEdit.show()
+
+def editTask():
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor()
+
+    name = telaEdit.inputName.text()
+    desc = telaEdit.inputDescricao.text()
+    data_final = telaEdit.inputData.text()
+
+    if name == "" or data_final == "":
+        QtWidgets.QMessageBox.warning(telaEdit, 'Atençao!', "Informe os dados necessarios para editar o status da task!")
+      
+    else:
+        sql = "UPDATE Tasks SET nome = %s, descricao = %s, data_final = %s WHERE ID = %s"
+        data = (name, desc, data_final, IdTaskEdit)
+
+        cursor.execute(sql, data) 
+        connection.commit() 
+
+        QtWidgets.QMessageBox.about(telaEditStatus, 'SUCESSO!', f"O a task de ID {IdTaskEdit} foi atualizada!")
+        cursor.close() 
+        connection.close()
+        telaEdit.inputName.clear()
+        telaEdit.inputDescricao.clear()
+        telaEdit.inputData.clear()
+        telaEdit.close()
+        telaMain.show()
+        listarItensUsuario()   
+
+def volTelaIID():
+    telaEdit.close()
+    telaInfoID.show()
 
 app = QtWidgets.QApplication(sys.argv)
 telaLogin = uic.loadUi('telaLogin.ui')
@@ -291,25 +370,25 @@ telaAdd = uic.loadUi('telaAdd.ui')
 telaEdit = uic.loadUi('telaEdit.ui')
 telaEditStatus = uic.loadUi('telaEditStatus.ui')
 telaDelete = uic.loadUi('telaDelete.ui')
+telaInfoID = uic.loadUi('telaInfoID.ui')
 telaLogin.show()
 telaLogin.btnLogin.clicked.connect(verUser)
 telaLogin.btnTelaCadastro.clicked.connect(abrirTelaCadastro)
 telaCadastro.btnCadastro.clicked.connect(cadastro)
 telaCadastro.btnVoltarLogin.clicked.connect(voltarTelaLogin)
 telaMain.btnTelaAdd.clicked.connect(abrirTelaAdd)
-telaMain.btnTelaEdit.clicked.connect(abrirTelaEdit)
+telaMain.btnTelaEdit.clicked.connect(abrirTelaInfoID)
 telaMain.btnTelaEditStatus.clicked.connect(abrirTelaEditStatus)
 telaMain.btnTelaDelete.clicked.connect(abrirTelaDelete)
+telaMain.btnLogout.clicked.connect(funLogout)
 telaAdd.btnAdd.clicked.connect(addTask)
+telaAdd.btnVoltarTelaMainAdd.clicked.connect(volTelaMainAdd)
 telaDelete.btnDelete.clicked.connect(deleteTask)
-#tela.btnLimpar.clicked.connect(Limpar) #Vinculando a função Limpar ao botão btnLimpar
-#tela.btnCadastrar.clicked.connect(insert_BD)
+telaDelete.btnVoltarTelaMainD.clicked.connect(volTelaMainDel)
+telaEditStatus.btnEditStatus.clicked.connect(editStatusTask)
+telaEditStatus.btnVoltarTelaMainES.clicked.connect(volTelaMainES)
+telaInfoID.btnNextTelaEdit.clicked.connect(getIdEdit)
+telaInfoID.btnVoltarTelaMainIID.clicked.connect(volTelaMainIID)
+telaEdit.btnEdit.clicked.connect(editTask)
+telaEdit.btnVoltarTelaIIDE.clicked.connect(volTelaIID)
 app.exec()
-
-
-
-
-
-#tela_teste.btnLogar.clicked.connect(Login)
-
-#QtWidgets.QMessageBox.about(TELA, 'TITLE', 'MESSAGE')
