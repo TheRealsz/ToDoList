@@ -30,3 +30,4 @@ INSERT INTO Statuses values (null, 'Nao feito');
 INSERT INTO Statuses values (null, 'Fazendo');
 INSERT INTO Statuses values (null, 'Feito');
 
+

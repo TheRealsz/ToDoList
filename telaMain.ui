@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>List Efficient</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(251, 251, 243);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="Icon">
     <property name="geometry">
@@ -313,7 +316,7 @@ border-radius: 5px;</string>
      </font>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnLogout">
+   <widget class="QPushButton" name="btnConta">
     <property name="geometry">
      <rect>
       <x>1010</x>
@@ -327,12 +330,12 @@ border-radius: 5px;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius: 10px;
-background-color: rgb(255, 99, 88);
+background-color: rgb(205, 217, 255);
 border-style: outset;
 border: 2px solid black;</string>
     </property>
     <property name="text">
-     <string>LOGOUT</string>
+     <string>CONTA</string>
     </property>
    </widget>
   </widget>

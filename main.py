@@ -34,17 +34,9 @@ def verUser():
     result = cursor.fetchone() 
     
     if result:
-        sqlName = "Select fullname from Usuarios where username = %s"
-        dataName = Username
-        cursor.execute(sqlName, (dataName,))
-        
-        fullname = cursor.fetchone()
-        fullnameLen = fullname[0].__len__()
         telaLogin.close()
         telaMain.show()
-        telaMain.lFullname.setFixedWidth(fullnameLen * 24)
-        telaMain.lFullname.setText(str(fullname[0]) + " ")
-
+ 
         sqlID = "Select ID from Usuarios where username = %s"
         dataID = Username
         cursor.execute(sqlID, (dataID,))
@@ -56,11 +48,25 @@ def verUser():
         telaLogin.inputUsername.clear()
         telaLogin.inputPassword.clear()
         listarItensUsuario()
+        updateUserinfo()
     else:
         QtWidgets.QMessageBox.warning(telaLogin, 'ERRO!', "O usuario ou a senha nao existe!")
 
+def updateUserinfo():
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor()
+    sqlExist = f"Select * from Usuarios where ID = {userID[0]}"
+    cursor.execute(sqlExist) 
+
+    result = cursor.fetchone() 
+
+    fullname = result[3]
+    fullnameLen = fullname.__len__()
+    telaMain.lFullname.setFixedWidth(fullnameLen * 24)
+    telaMain.lFullname.setText(str(fullname) + " ")
+
 def funLogout():
-    telaMain.close()
+    telaConta.close()
     telaLogin.show()
 
 def abrirTelaCadastro():
@@ -79,9 +85,21 @@ def abrirTelaEditStatus():
     telaMain.close()
     telaEditStatus.show()
 
+def abrirTelaManConta():
+    telaMain.close()
+    telaConta.show()
+
 def abrirTelaDelete():
     telaMain.close()
     telaDelete.show()
+
+def abrirTelaEditCont():
+    telaConta.close()
+    telaEditCont.show()
+
+def abrirTelaDelConta():
+    telaConta.close()
+    telaDeleteCont.show()
 
 def voltarTelaLogin():
     telaCadastro.close()
@@ -123,8 +141,9 @@ def cadastro():
     
     if cFullname == "" or cUsername == "" or cPassword == "":
         QtWidgets.QMessageBox.warning(telaCadastro, 'Atençao!', "Informe os dados necessarios para fazer o cadastro!")
+        return
     
-    elif result:
+    if result:
         QtWidgets.QMessageBox.warning(telaCadastro, 'Atençao!', "O username ou o nome completo do usuario ja existe!")
     
     else:
@@ -137,21 +156,12 @@ def cadastro():
 
         QtWidgets.QMessageBox.about(telaCadastro, 'SUCESSO!', "Foi cadastrado o novo usuario de ID: " + str(userid))
 
-        sqlName = "Select fullname from Usuarios where username = %s"
-        dataName = cUsername
-        cursor.execute(sqlName, (dataName,))
-
-        fullname = cursor.fetchone()
-        fullnameLen = fullname[0].__len__()
-        telaMain.lFullname.setFixedWidth(fullnameLen * 24)
-        telaMain.lFullname.setText(str(fullname[0]) + " ")
-
         sqlID = "Select ID from Usuarios where username = %s"
         dataID = cUsername
         cursor.execute(sqlID, (dataID,))
         global userID
         userID = cursor.fetchone()
-        print(str(userID[0]))
+  
 
         cursor.close()
         connection.close() 
@@ -202,6 +212,7 @@ def addTask():
 
     if aFazer == False and feito == False and fazendo == False:
         QtWidgets.QMessageBox.warning(telaAdd, 'Atençao!', "Informe o Status de sua task para poder criar ela")
+        return
 
     if name == "" or data_final == "":
         QtWidgets.QMessageBox.warning(telaAdd, 'Atençao!', "Informe os dados necessarios para criar a task!")
@@ -283,6 +294,7 @@ def editStatusTask():
 
     if aFazer == False and feito == False and fazendo == False:
         QtWidgets.QMessageBox.warning(telaEditStatus, 'Atençao!', "Informe o Status de sua task para poder editar ela")
+        return
 
     if Id == "":
         QtWidgets.QMessageBox.warning(telaEditStatus, 'Atençao!', "Informe o ID para editar o status da task!")
@@ -362,6 +374,96 @@ def volTelaIID():
     telaEdit.close()
     telaInfoID.show()
 
+def volTelaMainC():
+    telaConta.close()
+    telaMain.show()
+    listarItensUsuario()
+
+def voltTelaContaEC():
+    telaEditCont.close()
+    telaConta.show()
+
+def editCont():
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor()
+    global ecFullName
+    global ecUsername
+    global ecPassword
+    ecFullName = telaEditCont.inputName.text()
+    ecUsername = telaEditCont.inputUsername.text()
+    ecPassword = telaEditCont.inputPassword.text()
+
+    sqlExist = "Select username, fullname from Usuarios where (username = %s or fullname = %s) and ID <> %s"
+    dataExist = (ecUsername, ecFullName, userID[0])
+    cursor.execute(sqlExist, dataExist) 
+    print (ecFullName, ecUsername)
+    result = cursor.fetchone()
+    print(result) 
+
+    
+    if ecFullName == "":
+        sqlName = f"select fullname from Usuarios where ID = {userID[0]} "
+
+        cursor.execute(sqlName) 
+        ecFullName = cursor.fetchone()
+        ecFullName = ecFullName[0]
+        
+    if ecUsername == "":
+        sqlUser = f"select username from Usuarios where ID = {userID[0]} "
+
+        cursor.execute(sqlUser) 
+        ecUsername = cursor.fetchone()
+        ecUsername = ecUsername[0]
+    
+    if ecPassword == "":
+        sqlPassword = f"select senha from Usuarios where ID = {userID[0]} "
+
+        cursor.execute(sqlPassword) 
+        ecPassword = cursor.fetchone()
+        ecPassword = ecPassword[0]
+    
+    if result:
+        QtWidgets.QMessageBox.warning(telaEditCont, 'Atençao!', "O username ou o nome completo do usuario ja existe!")
+        return
+
+    sql = "UPDATE Usuarios SET fullname = %s, username = %s, senha = %s WHERE ID = %s"
+    data = (ecFullName, ecUsername, ecPassword, userID[0])
+
+    cursor.execute(sql, data) 
+    connection.commit() 
+
+    QtWidgets.QMessageBox.about(telaEditCont, 'SUCESSO!', f"A sua conta foi atualizada!")   
+
+    cursor.close()
+    connection.close()
+    telaEditCont.inputName.clear()
+    telaEditCont.inputUsername.clear()
+    telaEditCont.inputPassword.clear()
+    updateUserinfo()
+    telaEditCont.close()
+    telaMain.show() 
+    listarItensUsuario()
+
+def voltTelaContDC():
+    telaDeleteCont.close()
+    telaConta.show()
+
+def deleteCont():
+    connection = conectarBD("localhost","root", password, bd) 
+    cursor = connection.cursor()
+    sql = f"DELETE FROM Tasks WHERE userID = {userID[0]}"
+    cursor.execute(sql) 
+    connection.commit()
+
+    sql = f"DELETE FROM Usuarios WHERE ID = {userID[0]}"
+    cursor.execute(sql) 
+    connection.commit()
+    QtWidgets.QMessageBox.about(telaDeleteCont, 'SUCESSO!', f"A sua conta foi excluida!") 
+    cursor.close()
+    connection.close() 
+    telaDeleteCont.close()
+    telaLogin.show()
+
 app = QtWidgets.QApplication(sys.argv)
 telaLogin = uic.loadUi('telaLogin.ui')
 telaMain = uic.loadUi('telaMain.ui')
@@ -371,6 +473,9 @@ telaEdit = uic.loadUi('telaEdit.ui')
 telaEditStatus = uic.loadUi('telaEditStatus.ui')
 telaDelete = uic.loadUi('telaDelete.ui')
 telaInfoID = uic.loadUi('telaInfoID.ui')
+telaConta = uic.loadUi('telaConta.ui')
+telaEditCont = uic.loadUi('telaEditCont.ui')
+telaDeleteCont = uic.loadUi('telaDeleteCont.ui')
 telaLogin.show()
 telaLogin.btnLogin.clicked.connect(verUser)
 telaLogin.btnTelaCadastro.clicked.connect(abrirTelaCadastro)
@@ -380,7 +485,7 @@ telaMain.btnTelaAdd.clicked.connect(abrirTelaAdd)
 telaMain.btnTelaEdit.clicked.connect(abrirTelaInfoID)
 telaMain.btnTelaEditStatus.clicked.connect(abrirTelaEditStatus)
 telaMain.btnTelaDelete.clicked.connect(abrirTelaDelete)
-telaMain.btnLogout.clicked.connect(funLogout)
+telaMain.btnConta.clicked.connect(abrirTelaManConta)
 telaAdd.btnAdd.clicked.connect(addTask)
 telaAdd.btnVoltarTelaMainAdd.clicked.connect(volTelaMainAdd)
 telaDelete.btnDelete.clicked.connect(deleteTask)
@@ -391,4 +496,12 @@ telaInfoID.btnNextTelaEdit.clicked.connect(getIdEdit)
 telaInfoID.btnVoltarTelaMainIID.clicked.connect(volTelaMainIID)
 telaEdit.btnEdit.clicked.connect(editTask)
 telaEdit.btnVoltarTelaIIDE.clicked.connect(volTelaIID)
+telaConta.btnVoltaTelaMainC.clicked.connect(volTelaMainC)
+telaConta.btnTelaEditConta.clicked.connect(abrirTelaEditCont)
+telaConta.btnTelaDelConta.clicked.connect(abrirTelaDelConta)
+telaConta.btnLogout.clicked.connect(funLogout)
+telaEditCont.btnVoltaTelaContEC.clicked.connect(voltTelaContaEC)
+telaEditCont.btnEdit.clicked.connect(editCont)
+telaDeleteCont.btnVoltTelaContaDC.clicked.connect(voltTelaContDC)
+telaDeleteCont.btnDeleteCont.clicked.connect(deleteCont)
 app.exec()
