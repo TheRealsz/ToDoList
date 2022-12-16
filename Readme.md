@@ -4,6 +4,7 @@
 
 > Esta é a v1.0 do List Efficient, feito como um trabalho do curso de analise e desenvolvimento de sistemas
 
+> Foi desenvolvido em python, usando o Qt5 Designer para interface grafica e o MySQL Workbench para o banco de dados
 # Índice 
 
 * [Introdução](##Introdução)
@@ -37,10 +38,10 @@ um CRUD (create, read, update, delete) completo.
 ## Utilização do projeto
 Para utilizar o projeto, é necessario as seguintes ferramentas:
 
-- Visual Studio Code
-- Qt5 Designer
-- Python v3.9
-- MySql Workbench
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Qt5 Designer](https://www.youtube.com/watch?v=-hPD6IpIvqg)
+- [Python v3.9](https://www.python.org/ftp/python/3.9.13/)
+- [MySql Workbench](https://dev.mysql.com/downloads/workbench/)
 
 > Antes de clonar o repositorio, busque como instalar e utilizar cada ferramenta acima para que tudo ocorra bem ao rodar.
 
