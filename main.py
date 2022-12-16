@@ -10,6 +10,9 @@ dotenv.load_dotenv(dotenv.find_dotenv())
 password = os.getenv("passwordBD")
 bd = os.getenv("bdName")
 
+# Connection e cursor em variaveis globais, apenas fechar a execucao no cod
+# Dados do usuario todo na funcao updtUser
+
 def conectarBD(host, usuario, senha, DB):
     connection = mysql.connector.connect( 
         host = host, 
