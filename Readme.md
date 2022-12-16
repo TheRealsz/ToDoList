@@ -11,7 +11,7 @@
 * [Utilização do projeto](##tilização-do-projeto)
 * [Contato](##Contato)
 * [Status do Projeto](##Status-do-projeto)
-* [Autores] (##Autores)
+* [Autores](##Autores)
 
 
 ## Introdução
