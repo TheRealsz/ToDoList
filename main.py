@@ -23,10 +23,15 @@ def conectarBD(host, usuario, senha, DB):
 
     return connection
 
-def verUser():
-    connection = conectarBD("localhost","root", password, bd) 
+def connectionCursor():
+    global connection
+    connection = conectarBD("localhost","root", password, bd)
+    global cursor
     cursor = connection.cursor() 
-    
+
+def verUser():
+    connectionCursor()
+
     Username = telaLogin.inputUsername.text()
     Password = telaLogin.inputPassword.text()
     
@@ -56,8 +61,7 @@ def verUser():
         QtWidgets.QMessageBox.warning(telaLogin, 'ERRO!', "O usuario ou a senha nao existe!")
 
 def updateUserinfo():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
+    connectionCursor()
     sqlExist = f"Select * from Usuarios where ID = {userID[0]}"
     cursor.execute(sqlExist) 
 
@@ -129,9 +133,7 @@ def volTelaMainIID():
     listarItensUsuario()
 
 def cadastro():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
-
+    connectionCursor()
     cFullname = telaCadastro.inputCFullname.text()
     cUsername = telaCadastro.inputCUsername.text()
     cPassword = telaCadastro.inputCPassword.text()
@@ -170,7 +172,7 @@ def cadastro():
         connection.close() 
         telaCadastro.inputCFullname.clear()
         telaCadastro.inputCUsername.clear()
-        telaCadastro.inputCPassword.text()
+        telaCadastro.inputCPassword.clear()
         telaCadastro.close()
         telaMain.show()
         listarItensUsuario()
@@ -179,8 +181,7 @@ def listarItensUsuario():
     telaMain.lwFazer.clear()
     telaMain.lwFazendo.clear()
     telaMain.lwFeito.clear()
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
+    connectionCursor()
     sqlTask = "Select * from Tasks where userID = %s"
     dataTask = str(userID[0])
     cursor.execute(sqlTask, (dataTask,))
@@ -192,7 +193,7 @@ def listarItensUsuario():
         descTask = task[inicio][2]
         dateTask = task[inicio][3]
         listTask = f"{idTask}. {nameTask} \n Descricao: {descTask} \n Data final: {dateTask} \n"
-        statusTask = task [inicio][5]
+        statusTask = task[inicio][5]
         if statusTask == 1:
             telaMain.lwFazer.addItem(listTask)
         if statusTask == 2:
@@ -203,9 +204,7 @@ def listarItensUsuario():
         inicio = inicio+1
 
 def addTask():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
-
+    connectionCursor()
     name = telaAdd.inputName.text()
     desc = telaAdd.inputDescricao.text()
     data_final = telaAdd.inputData.text()
@@ -221,35 +220,20 @@ def addTask():
         QtWidgets.QMessageBox.warning(telaAdd, 'Atençao!', "Informe os dados necessarios para criar a task!")
       
     else:
+        sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
         if aFazer == True:
-            sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
             data = (name, desc, data_final, userID[0], 1)
 
-            cursor.execute(sql, data) 
-            connection.commit() 
-            taskID = cursor.lastrowid
-
-            QtWidgets.QMessageBox.about(telaAdd, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
-
         if fazendo == True:
-            sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
             data = (name, desc, data_final, userID[0], 2)
 
-            cursor.execute(sql, data) 
-            connection.commit() 
-            taskID = cursor.lastrowid
-
-            QtWidgets.QMessageBox.about(telaAdd, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
-
         if feito == True:
-            sql = "INSERT INTO Tasks (nome, descricao, data_final, userID, statusID) VALUES (%s, %s, %s, %s, %s)"
             data = (name, desc, data_final, userID[0], 3)
-
-            cursor.execute(sql, data) 
-            connection.commit() 
-            taskID = cursor.lastrowid
-
-            QtWidgets.QMessageBox.about(telaAdd, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))     
+     
+        cursor.execute(sql, data) 
+        connection.commit() 
+        taskID = cursor.lastrowid
+        QtWidgets.QMessageBox.about(telaAdd, 'SUCESSO!', "Foi cadastrado a nova task de ID: " + str(taskID))
 
         cursor.close() 
         connection.close()
@@ -261,8 +245,7 @@ def addTask():
         listarItensUsuario()   
 
 def deleteTask():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
+    connectionCursor()
     idTask = telaDelete.inputID.text()
     
     if idTask == "":
@@ -287,8 +270,7 @@ def deleteTask():
         listarItensUsuario()
 
 def editStatusTask():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
+    connectionCursor()
 
     Id = telaEditStatus.inputID.text()
     aFazer = telaEditStatus.rbFazer.isChecked()
@@ -303,29 +285,18 @@ def editStatusTask():
         QtWidgets.QMessageBox.warning(telaEditStatus, 'Atençao!', "Informe o ID para editar o status da task!")
       
     else:
+        sql = "UPDATE Tasks SET statusID = %s WHERE ID = %s"
         if aFazer == True:
-            sql = "UPDATE Tasks SET statusID = %s WHERE ID = %s"
             data = (1, Id)
 
-            cursor.execute(sql, data) 
-            connection.commit() 
-
-
         if fazendo == True:
-            sql = "UPDATE Tasks SET statusID = %s WHERE ID = %s"
             data = (2, Id)
 
-            cursor.execute(sql, data) 
-            connection.commit() 
-
-
         if feito == True:
-            sql = "UPDATE Tasks SET statusID = %s WHERE ID = %s"
             data = (3, Id)
 
-            cursor.execute(sql, data) 
-            connection.commit() 
-
+        cursor.execute(sql, data) 
+        connection.commit() 
         QtWidgets.QMessageBox.about(telaEditStatus, 'SUCESSO!', f"O status da task de ID {Id} foi atualizado!")
         cursor.close() 
         connection.close()
@@ -346,8 +317,7 @@ def getIdEdit():
         telaEdit.show()
 
 def editTask():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
+    connectionCursor()
 
     name = telaEdit.inputName.text()
     desc = telaEdit.inputDescricao.text()
@@ -387,8 +357,7 @@ def voltTelaContaEC():
     telaConta.show()
 
 def editCont():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
+    connectionCursor()
     global ecFullName
     global ecUsername
     global ecPassword
@@ -399,10 +368,7 @@ def editCont():
     sqlExist = "Select username, fullname from Usuarios where (username = %s or fullname = %s) and ID <> %s"
     dataExist = (ecUsername, ecFullName, userID[0])
     cursor.execute(sqlExist, dataExist) 
-    print (ecFullName, ecUsername)
     result = cursor.fetchone()
-    print(result) 
-
     
     if ecFullName == "":
         sqlName = f"select fullname from Usuarios where ID = {userID[0]} "
@@ -452,8 +418,7 @@ def voltTelaContDC():
     telaConta.show()
 
 def deleteCont():
-    connection = conectarBD("localhost","root", password, bd) 
-    cursor = connection.cursor()
+    connectionCursor()
     sql = f"DELETE FROM Tasks WHERE userID = {userID[0]}"
     cursor.execute(sql) 
     connection.commit()
