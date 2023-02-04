@@ -4,7 +4,7 @@
 
 > Esta é a v1.0 do List Efficient, feito como um trabalho do curso de analise e desenvolvimento de sistemas
 
-> Foi desenvolvido em python, usando o Qt5 Designer para interface grafica e o MySQL Workbench para o banco de dados
+> Foi desenvolvido em python, usando o Qt5 Designer para interface gráfica e o MySQL Workbench para o banco de dados
 # Índice 
 
 * [Introdução](##Introdução)
@@ -25,13 +25,13 @@ um CRUD (create, read, update, delete) completo.
 
 ## Funcionalidades
 
-- `Cadastrar`: Poder criar uma conta exclusivamente sua, com seu nome completo, nome de usuario e sua senha
-- `Login`: Poder acessar sua conta utilizando o nome do usuario e a senha cadastrados
+- `Cadastrar`: Poder criar uma conta exclusivamente sua, com seu nome completo, nome de usuário e sua senha
+- `Login`: Poder acessar sua conta utilizando o nome do usuário e a senha cadastrados
 - `Adicionar`: Adicionar uma "task" a sua lista de tasks, adicionando nome, descrição, data final e o status (a fazer, fazendo e feito)
-- `Editar`: Editar uma task ja existente, podendo mudar cada atributo dela
-- `Editar status`: Pode editar exclusivamente o status dela
+- `Editar`: Editar uma task já existente, podendo mudar cada atributo dela
+- `Editar status`: Pode editar exclusivamente o status da task
 - `Deletar`: Deleta uma task especifica de sua escolha
-- `Editar conta`: Edita sua conta, podendo mudar a partir de sua escolha o nome completo, nome do usuario e a senha
+- `Editar conta`: Edita sua conta, podendo mudar a partir de sua escolha o nome completo, nome do usuário e a senha
 - `Deletar conta`: Deleta a conta logada
 - `Logout`: Faz o logout e volta para a tela de login
 
@@ -43,17 +43,17 @@ Para utilizar o projeto, é necessario as seguintes ferramentas:
 - [Python v3.9](https://www.python.org/ftp/python/3.9.13/)
 - [MySql Workbench](https://dev.mysql.com/downloads/workbench/)
 
-> Antes de clonar o repositorio, busque como instalar e utilizar cada ferramenta acima para que tudo ocorra bem ao rodar.
+> Antes de clonar o repositório, busque como instalar e utilizar cada ferramenta acima para que tudo ocorra bem ao rodar.
 
-1. Clone o repositorio
-2. Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu `.env` que são: `passwordBD` e `bdName`
-3. Abra o ``main.py`` no seu visual studio code e clique com o botao direito no meio do codigo, apos isso clique em ``Run Pyhton File in Terminal``
+1. Clone o repositório
+2. Para rodar esse projeto, você ira precisar adicionar as seguintes variáveis de ambiente no seu `.env` que são: `passwordBD` e `bdName`
+3. Abra o ``main.py`` no seu visual studio code e clique com o botao direito no meio do código, após isso clique em ``Run Pyhton File in Terminal``
 
 ## Contato
 Temos algumas formas de contato, elas podem ser encontradas [aqui](https://github.com/TheRealRobinho)
 
 ## Status do projeto
-:construction: Projeto em construção :construction:
+:white_check_mark: Finalizado :white_check_mark:
 
 ## Autores
 [<img src="https://avatars.githubusercontent.com/u/77800184?v=4" width=185><br><sub>Robson Diego Andrade de Oliveira</sub>](https://github.com/TheRealRobinho)
