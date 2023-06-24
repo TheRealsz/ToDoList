@@ -50,10 +50,10 @@ Para utilizar o projeto, é necessario as seguintes ferramentas:
 3. Abra o ``main.py`` no seu visual studio code e clique com o botao direito no meio do código, após isso clique em ``Run Pyhton File in Terminal``
 
 ## Contato
-Temos algumas formas de contato, elas podem ser encontradas [aqui](https://github.com/TheRealRobinho)
+Temos algumas formas de contato, elas podem ser encontradas [aqui](https://github.com/TheRealsz)
 
 ## Status do projeto
 :white_check_mark: Finalizado :white_check_mark:
 
 ## Autores
-[<img src="https://avatars.githubusercontent.com/u/77800184?v=4" width=185><br><sub>Robson Diego Andrade de Oliveira</sub>](https://github.com/TheRealRobinho)
+[<img src="https://avatars.githubusercontent.com/u/77800184?v=4" width=185><br><sub>Robson Diego Andrade de Oliveira</sub>](https://github.com/TheRealsz)
